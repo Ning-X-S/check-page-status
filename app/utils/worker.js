@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer')
 
+const whiteStatus = [200, 301, 302]
 async function checkPageStatus (url) {
   const browser = await puppeteer.launch({ headless: true })
   const page = await browser.newPage()
@@ -25,7 +26,7 @@ async function checkPageStatus (url) {
   page.on('response', async (response) => {
     responseNum += 1
     const status = response.status()
-    if (status !== 200 && status !== 302) {
+    if (!whiteStatus.includes(status)) {
       returnData.error_list.push({
         url: response.url(),
         code: status,
