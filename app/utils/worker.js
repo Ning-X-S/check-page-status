@@ -5,11 +5,10 @@ async function checkPageStatus (url) {
   const page = await browser.newPage()
   let responseNum = 0
   const returnData = {
-    error_code: 0,
-    data: {
-      error_list: []
-    },
-    message: ''
+    check_url: url,
+    request_num: 0,
+    error_num: 0,
+    error_list: []
   }
   await page.setRequestInterception(true)
   page.on('request', async (request) => {
@@ -25,12 +24,14 @@ async function checkPageStatus (url) {
   })
   page.on('response', async (response) => {
     responseNum += 1
-    if (response.status() !== 200) {
-      returnData.data.error_list.push({
+    const status = response.status()
+    if (status !== 200 && status !== 302) {
+      returnData.error_list.push({
         url: response.url(),
-        code: response.status(),
+        code: status,
         type: response.request().resourceType()
       })
+      returnData.error_num += 1
     }
   })
   // waitUntil:等页面的请求全部响应完毕，再执行close操作，否则拿不到response
@@ -39,15 +40,8 @@ async function checkPageStatus (url) {
   // await page.screenshot({ path: 'example.png', fullPage: true  })
   await browser.close()
   console.log('Done')
-  if (returnData.data.error_list.length > 0) {
-    returnData.error_code = 4000132
-    returnData.message = `共${responseNum}个请求，其中存在${returnData.data.error_list.length}个失败请求。`
-  } else {
-    returnData.data = {}
-    returnData.message = `校验通过，共${responseNum}个请求。`
-  }
+  returnData.request_num = responseNum
   process.send(returnData)
-  // ctx.body = returnData
 }
 
 process.on('message', async (data) => {

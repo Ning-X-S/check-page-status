@@ -3,9 +3,9 @@ const Router = require('koa-router')
 const router = new Router()
 // const { checkPageStatus } = require('./utils/checkPageStatus')
 
-// const { checkPageStatus } = require('./utils/master')
+const { checkPageStatus } = require('./utils/master')
 
-const { checkPageStatus } = require('./utils/child')
+// const { checkPageStatus } = require('./utils/child')
 
 router.get('/test', (ctx, next) => {
   ctx.body = {

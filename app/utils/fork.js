@@ -50,10 +50,6 @@ async function checkPageStatus (url) {
   // ctx.body = returnData
 }
 
-// eslint-disable-next-line func-call-spacing
-const atime = new Date().getTime();
-
 (async () => {
   await checkPageStatus(process.env.url)
-  console.log(new Date().getTime() - atime)
 })()
