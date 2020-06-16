@@ -38,7 +38,7 @@ async function checkPageStatus (url) {
   // waitUntil:等页面的请求全部响应完毕，再执行close操作，否则拿不到response
   await page.goto(url, { waitUntil: 'networkidle0' })
   // fullPage: true，页面很长，全部截图，否则只能截图一半
-  // await page.screenshot({ path: 'example.png', fullPage: true  })
+  await page.screenshot({ path: 'example-master.png', fullPage: true })
   await browser.close()
   console.log('Done')
   returnData.request_num = responseNum

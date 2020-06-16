@@ -12,7 +12,7 @@ async function checkPageStatus (ctx, next) {
   const returnData = await new Promise((resolve, reject) => {
     let num = 0
     for (let i = 0; i < urlArr.length; i++) {
-      const spawnObj = fork(`${path.join(__dirname, './fork.js')}`, { env: { url: urlArr[i] } })
+      const spawnObj = fork(`${path.join(__dirname, './fork.js')}`, { silent: true, env: { url: urlArr[i] } })
       spawnObj.on('message', (data) => {
         num++
         if (num === urlArr.length) {
