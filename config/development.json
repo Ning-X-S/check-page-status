@@ -1,5 +1,5 @@
 {
   "local_webUrl": ["https://juejin.im/", "https://www.zhihu.com/"],
-  "inf_webUrl": "https://juejin.im/",
-  "online_webUrl": "https://juejin.im/"
+  "inf_webUrl": ["https://juejin.im/", "https://www.zhihu.com/"],
+  "online_webUrl": ["https://juejin.im/", "https://www.zhihu.com/"]
 }

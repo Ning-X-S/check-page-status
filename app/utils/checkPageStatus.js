@@ -47,7 +47,7 @@ async function checkPageStatus (ctx, next) {
     }
   })
   // waitUntil:等页面的请求全部响应完毕，再执行close操作，否则拿不到response
-  await page.goto(config[`${ctx.params.projectName}_webUrl`], { waitUntil: 'networkidle0' })
+  await page.goto(config[`${ctx.params.projectName}_webUrl`][0], { waitUntil: 'networkidle0' })
   // fullPage: true，页面很长，全部截图，否则只能截图一半
   await page.screenshot({ path: 'example-all.png', fullPage: true })
   await browser.close()
