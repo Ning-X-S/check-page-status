@@ -19,3 +19,7 @@
   ```bash
   npm run prod
   ```
+
+## 启动脚本
+
+  # Node版本大于10
